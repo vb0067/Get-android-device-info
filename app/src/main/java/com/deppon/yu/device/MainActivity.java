@@ -3,6 +3,7 @@ package com.deppon.yu.device;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ((TextView)findViewById(R.id.textView)).setText(this.getDeviceInfo());
     }
 
     /**
@@ -26,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
         sb.append("cpu指令集2:" + Build.CPU_ABI2 + "\n");
         sb.append("设置参数： "+ Build.DEVICE + "\n");
         sb.append("显示屏参数： "+ Build.DISPLAY + "\n");
-        sb.append("无线电固件版本： "+ Build.getRadioVersion() + "\n");
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
+            sb.append("无线电固件版本： "+ Build.getRadioVersion() + "\n");
+        }
         sb.append("硬件识别码： "+ Build.FINGERPRINT + "\n");
         sb.append("硬件名称： "+ Build.HARDWARE + "\n");
         sb.append("HOST: "+ Build.HOST + "\n");
