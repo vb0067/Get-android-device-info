@@ -24,8 +24,48 @@ public class MainActivity extends AppCompatActivity {
         sb.append("主板： "+ Build.BOARD + "\n");
         sb.append("系统启动程序版本号： "+ Build.BOOTLOADER + "\n");
         sb.append("系统定制商： "+ Build.BRAND + "\n");
-        sb.append("cpu指令集："+ Build.CPU_ABI + "\n");
-        sb.append("cpu指令集2:" + Build.CPU_ABI2 + "\n");
+
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            sb.append("cpu指令集：" + Build.CPU_ABI + "\n");
+            sb.append("cpu指令集2:" + Build.CPU_ABI2 + "\n");
+        }else {
+
+            if(Build.SUPPORTED_32_BIT_ABIS.length != 0){
+                sb.append("cpu指令集:");
+                sb.append(" [ 32位 ] ");
+                sb.append("[ ");
+                for (int i = 0; i < Build.SUPPORTED_32_BIT_ABIS.length; i++) {
+
+                    if (i == Build.SUPPORTED_32_BIT_ABIS.length - 1) {
+                        sb.append(Build.SUPPORTED_32_BIT_ABIS[i]);
+                    } else {
+                        sb.append(Build.SUPPORTED_32_BIT_ABIS[i] + " , ");
+                    }
+
+                }
+                sb.append(" ]");
+                sb.append("\n");
+            }
+
+            if(Build.SUPPORTED_64_BIT_ABIS.length != 0){
+                sb.append("cpu指令集:");
+                sb.append(" [ 64位 ] ");
+                sb.append("[ ");
+                for(int i=0;i<Build.SUPPORTED_64_BIT_ABIS.length;i++){
+
+                    if(i == Build.SUPPORTED_64_BIT_ABIS.length - 1){
+                        sb.append(Build.SUPPORTED_64_BIT_ABIS[i]);
+                    }else{
+                        sb.append(Build.SUPPORTED_64_BIT_ABIS[i] + " , ");
+                    }
+
+                }
+                sb.append(" ]");
+                sb.append("\n");
+            }
+
+        }
+
         sb.append("设置参数： "+ Build.DEVICE + "\n");
         sb.append("显示屏参数： "+ Build.DISPLAY + "\n");
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH){
