@@ -20,6 +20,43 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    //配置签名信息
+    signingConfigs {
+        debug {
+            keyAlias 'DEBUG'
+            keyPassword '123456'
+            storeFile file('../keystore/debug/debug.jks')
+            storePassword '123456'
+        }
+
+    }
+
+    buildTypes {
+
+        release {
+            debuggable false
+            jniDebuggable false
+            //minifyEnabled false      //混淆编译
+            minifyEnabled true      //混淆编译
+            zipAlignEnabled true    //设置是否对APK包执行ZIP对齐优化
+            shrinkResources true    //移除无用的资源文件
+
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+
+            signingConfig signingConfigs.debug
+        }
+
+        debug {
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+
+
+            signingConfig signingConfigs.debug
+        }
+    }
 }
 
 dependencies {
