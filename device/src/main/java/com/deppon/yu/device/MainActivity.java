@@ -1,8 +1,10 @@
 package com.deppon.yu.device;
 
+import android.content.Context;
 import android.os.Build;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         sb.append("TIME: "+ Build.TIME + "\n");
         sb.append("builder类型：" + Build.TYPE + "\n");
         sb.append("USER: "+ Build.USER + "\n");
+        TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
+        sb.append("DeviceId: "+ tm.getDeviceId()+ "\n");
         return sb.toString();
     }
 }
